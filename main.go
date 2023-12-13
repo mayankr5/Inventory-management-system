@@ -5,11 +5,9 @@ import (
 )
 
 func main() {
-	// initialise gofr object
 	app := gofr.New()
 
-	// register route greet
-	app.GET("/greet", func(ctx *gofr.Context) (interface{}, error) {
+	app.GET("/", func(ctx *gofr.Context) (interface{}, error) {
 
 		return "Hello World!", nil
 	})
