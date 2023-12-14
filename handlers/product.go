@@ -62,3 +62,55 @@ func GetProductByID(ctx *gofr.Context) (interface{}, error) {
 
 	return resp, nil
 }
+
+func AddProduct(ctx *gofr.Context) (interface{}, error) {
+	var product models.Product
+	var category models.Category
+
+	if err := ctx.Bind(&product); err != nil {
+		ctx.Logger.Errorf("error in binding: %v", err)
+		return nil, errors.InvalidParam{Param: []string{"body"}}
+	}
+	fmt.Printf("%+v\n", product)
+
+	if err := ctx.DB().QueryRowContext(ctx, "SELECT category_id from categories where name=$1", product.Category).Scan(&category.ID); err == sql.ErrNoRows {
+		if err := ctx.DB().QueryRowContext(ctx, "INSERT INTO categories(name) VALUES($1)", product.Category); err != nil {
+			return nil, sql.ErrConnDone
+		}
+
+	}
+	fmt.Print(product.Category)
+	ctx.DB().QueryRowContext(ctx, "INSERT INTO product(name,quantity,price,category_id) VALUES($1,$2,$3,(SELECT category_id from categories where name = $4))", product.Name, product.Quantity, product.Price, product.Category).Scan(&product.Name, &product.Quantity, &product.Price)
+	// if err != nil {
+	// 	return nil, errors.DB{Err: err}
+	// }
+
+	return "Successfull added", nil
+}
+
+func UpdateProduct(ctx *gofr.Context) (interface{}, error) {
+	id := ctx.PathParam("id")
+
+	if id == "" {
+		return nil, errors.MissingParam{Param: []string{"id"}}
+	}
+
+	if _, err := strconv.Atoi(id); err != nil {
+		return nil, errors.InvalidParam{Param: []string{"id"}}
+	}
+
+	var product models.Product
+
+	if err := ctx.Bind(&product); err != nil {
+		ctx.Logger.Errorf("error in binding: %v", err)
+		return nil, errors.InvalidParam{Param: []string{"body"}}
+	}
+
+	ctx.DB().QueryRowContext(ctx, " UPDATE product SET name=$1, quantity=$2, price=$3, category_id=(SELECT category_id from categories where name=$4) where product_id=$5 ", product.Name, product.Quantity, product.Price, product.Category, id).
+		Scan(&product.ID, &product.Name, &product.Quantity, &product.Price, &product.Category)
+	// if err == sql.ErrNoRows {
+	// 	return nil, errors.EntityNotFound{Entity: "product", ID: id}
+	// }
+
+	return "update successfully", nil
+}
