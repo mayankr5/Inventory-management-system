@@ -51,16 +51,16 @@ func GetProductByID(ctx *gofr.Context) (interface{}, error) {
 		return nil, errors.InvalidParam{Param: []string{"id"}}
 	}
 
-	var resp models.Product
+	var product models.Product
 
 	err := ctx.DB().QueryRowContext(ctx, " SELECT pd.product_id as ID, pd.name as Name, pd.quantity as Quantity, pd.Price as Price, ctg.name as Category FROM product pd inner join categories ctg on pd.category_id = ctg.category_id where product_id=$1", id).
-		Scan(&resp.ID, &resp.Name, &resp.Quantity, &resp.Price, &resp.Category)
+		Scan(&product.ID, &product.Name, &product.Quantity, &product.Price, &product.Category)
 	fmt.Println(err)
 	if err == sql.ErrNoRows {
 		return nil, errors.EntityNotFound{Entity: "product", ID: id}
 	}
 
-	return resp, nil
+	return product, nil
 }
 
 func AddProduct(ctx *gofr.Context) (interface{}, error) {
@@ -71,7 +71,6 @@ func AddProduct(ctx *gofr.Context) (interface{}, error) {
 		ctx.Logger.Errorf("error in binding: %v", err)
 		return nil, errors.InvalidParam{Param: []string{"body"}}
 	}
-	fmt.Printf("%+v\n", product)
 
 	if err := ctx.DB().QueryRowContext(ctx, "SELECT category_id from categories where name=$1", product.Category).Scan(&category.ID); err == sql.ErrNoRows {
 		if err := ctx.DB().QueryRowContext(ctx, "INSERT INTO categories(name) VALUES($1)", product.Category); err != nil {
@@ -106,11 +105,30 @@ func UpdateProduct(ctx *gofr.Context) (interface{}, error) {
 		return nil, errors.InvalidParam{Param: []string{"body"}}
 	}
 
-	ctx.DB().QueryRowContext(ctx, " UPDATE product SET name=$1, quantity=$2, price=$3, category_id=(SELECT category_id from categories where name=$4) where product_id=$5 ", product.Name, product.Quantity, product.Price, product.Category, id).
-		Scan(&product.ID, &product.Name, &product.Quantity, &product.Price, &product.Category)
-	// if err == sql.ErrNoRows {
-	// 	return nil, errors.EntityNotFound{Entity: "product", ID: id}
-	// }
+	_, err := ctx.DB().ExecContext(ctx, " UPDATE product SET name=$1, quantity=$2, price=$3, category_id=(SELECT category_id from categories where name=$4) where product_id=$5 ", product.Name, product.Quantity, product.Price, product.Category, id)
+	if err != nil {
+		return nil, errors.DB{Err: err}
+	}
 
 	return "update successfully", nil
+}
+
+func DeleteProduct(ctx *gofr.Context) (interface{}, error) {
+	id := ctx.PathParam("id")
+
+	if id == "" {
+		return nil, errors.MissingParam{Param: []string{"id"}}
+	}
+
+	if _, err := strconv.Atoi(id); err != nil {
+		return nil, errors.InvalidParam{Param: []string{"id"}}
+	}
+
+	_, err := ctx.DB().ExecContext(ctx, "DELETE FROM product WHERE product_id=$1", id)
+	if err != nil {
+		return nil, errors.DB{Err: err}
+	}
+
+	return "Deleted successfully", nil
+
 }
