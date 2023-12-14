@@ -72,17 +72,18 @@ func AddProduct(ctx *gofr.Context) (interface{}, error) {
 		return nil, errors.InvalidParam{Param: []string{"body"}}
 	}
 
-	if err := ctx.DB().QueryRowContext(ctx, "SELECT category_id from categories where name=$1", product.Category).Scan(&category.ID); err == sql.ErrNoRows {
+	if err := ctx.DB().QueryRowContext(ctx, "SELECT category_id from categories where name=$1", product.Category).
+		Scan(&category.ID); err == sql.ErrNoRows {
 		if err := ctx.DB().QueryRowContext(ctx, "INSERT INTO categories(name) VALUES($1)", product.Category); err != nil {
 			return nil, sql.ErrConnDone
 		}
 
 	}
 	fmt.Print(product.Category)
-	ctx.DB().QueryRowContext(ctx, "INSERT INTO product(name,quantity,price,category_id) VALUES($1,$2,$3,(SELECT category_id from categories where name = $4))", product.Name, product.Quantity, product.Price, product.Category).Scan(&product.Name, &product.Quantity, &product.Price)
-	// if err != nil {
-	// 	return nil, errors.DB{Err: err}
-	// }
+	_, err := ctx.DB().ExecContext(ctx, "INSERT INTO product(name,quantity,price,category_id) VALUES($1,$2,$3,(SELECT category_id from categories where name = $4))", product.Name, product.Quantity, product.Price, product.Category)
+	if err != nil {
+		return nil, err
+	}
 
 	return "Successfull added", nil
 }
