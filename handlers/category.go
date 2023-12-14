@@ -75,7 +75,7 @@ func AddCategory(ctx *gofr.Context) (interface{}, error) {
 		return nil, err
 	}
 
-	return "Successfully added", nil
+	return "Successfully Added", nil
 }
 
 func UpdateCategory(ctx *gofr.Context) (interface{}, error) {

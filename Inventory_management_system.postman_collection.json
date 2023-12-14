@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "ca924a33-b814-40b6-8e42-0f8d92462d35",
+		"name": "Inventory_management_system",
+		"description": "It is basic API's of crud operations for product and category.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30139419"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "Here Change Base URL according to the PORT (default is 3000) on which it is running.\n\nBy Default base_url : http://localhost:3000"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/{id}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"{id}"
+							]
+						},
+						"description": "Give specific id for fetching that product"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Nails\",\n    \"Quantity\": 1000,\n    \"Price\": 10,\n    \"Category\": \"Hardware\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "To add product as below structure"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Nails\",\n    \"Quantity\": 1500,\n    \"Price\": 8,\n    \"Category\": \"Hardware\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products/{id}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/{id}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories/{id}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Cloth\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\" : \"Cloths\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/categories/{id}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories/{id}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
