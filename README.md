@@ -30,7 +30,7 @@ brew install golang
 ```sh
 brew install postgresql
 ```
-
+<!-- 
 ### Set up Database
 ---
 1. Create database by following command. (_Change user_name in following command with postgres user_name_)
@@ -41,7 +41,7 @@ psql template1 -c "CREATE DATABASE inventory_management_system WITH OWNER user_n
 ```sh
 psql inventory_management_system < inventory_management_system
 ```
-Now Database is all setup.
+Now Database is all setup. -->
 
 ### Set up Project
 ---
@@ -49,27 +49,27 @@ Now Database is all setup.
 ```sh
 git clone https://github.com/mayankr5/Inventory-management-system.git
 ```
-2. Inside that directory run:
-```sh
-go mod init github.com/inventory-management-system
-```
-```sh
-go mod tidy
-```
-3. Set up the _/config/.env_ file: <br>
+2. Set up the _/config/.env_ file: <br>
 Set **DB_USER** to _user_ and **DB_PASSWORD** to _password_ of that correspond user of postgres
 ```
 HTTP_PORT=3000
 
 DB_HOST=localhost
-DB_USER={user}
-DB_PASSWORD={password}
+DB_USER={USER_NAME}
+DB_PASSWORD={USER_PASSWORD}
 DB_NAME=inventory_management_system
 DB_PORT=5432
 DB_DIALECT=postgres
 ```
-Now we are ready to run the project.
-
+3. Now we have to setup Database
+- Run the following command in terminal to create a database. (Make sure you are currently in this directory)
+```sh
+source configs/.env && psql template1 -c "CREATE DATABASE $DB_NAME WITH OWNER $DB_USER;";
+```
+- Now dump schema in that database
+```sh
+source configs/.env && pg_restore -U $DB_USER -h $DB_HOST -d $DB_NAME db.dump
+```
 
 ### Run Project
 
