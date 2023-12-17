@@ -16,10 +16,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/products",
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"products"
 							]
@@ -29,15 +31,38 @@
 					"response": []
 				},
 				{
+					"name": "Get Product By Id (example)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products/25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"25"
+							]
+						},
+						"description": "Give specific id for fetching that product"
+					},
+					"response": []
+				},
+				{
 					"name": "Get Product By Id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/products/{id}",
+							"raw": "http://localhost:3000/products/{id}",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"products",
 								"{id}"
@@ -57,10 +82,12 @@
 							"raw": "{\n    \"Name\": \"Nails\",\n    \"Quantity\": 1000,\n    \"Price\": 10,\n    \"Category\": \"Hardware\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/products",
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"products"
 							]
@@ -70,7 +97,7 @@
 					"response": []
 				},
 				{
-					"name": "Update a Product",
+					"name": "Update Product By ID (example)",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -79,10 +106,36 @@
 							"raw": "{\n    \"Name\": \"Nails\",\n    \"Quantity\": 1500,\n    \"Price\": 8,\n    \"Category\": \"Hardware\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/products/{id}",
+							"raw": "http://localhost:3000/products/31",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
+							"path": [
+								"products",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"Nails\",\n    \"Quantity\": 1500,\n    \"Price\": 8,\n    \"Category\": \"Hardware\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
 							"path": [
 								"products",
 								"{id}"
@@ -92,18 +145,40 @@
 					"response": []
 				},
 				{
-					"name": "Delete Product",
+					"name": "Delete Product By ID (example)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/products/{id}",
+							"raw": "http://localhost:3000/products/{id}",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"products",
 								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"31"
 							]
 						}
 					},
@@ -120,12 +195,34 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/categories",
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By ID (example)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"4"
 							]
 						}
 					},
@@ -137,10 +234,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/categories/{id}",
+							"raw": "http://localhost:3000/categories/{id}",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"categories",
 								"{id}"
@@ -159,10 +258,12 @@
 							"raw": "{\n    \"Name\": \"Cloth\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/categories",
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
 							"path": [
 								"categories"
 							]
@@ -171,7 +272,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Category",
+					"name": "Update Category By ID (example)",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -180,10 +281,36 @@
 							"raw": "{\n    \"Name\" : \"Cloths\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/categories/{id}",
+							"raw": "http://localhost:3000/categories/6",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\" : \"Cloths\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
 							"path": [
 								"categories",
 								"{id}"
@@ -193,15 +320,37 @@
 					"response": []
 				},
 				{
-					"name": "Delete Category",
+					"name": "Delete Category By ID (example)",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/categories/{id}",
+							"raw": "http://localhost:3000/categories/6",
+							"protocol": "http",
 							"host": [
-								"{{base_url}}"
+								"localhost"
 							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
 							"path": [
 								"categories",
 								"{id}"

@@ -15,21 +15,11 @@ It is basic inventory management system utilising basic crud operations. It prov
 ---
 
 ## Getting Started
-
 ### Prerequisites
 ---
 
-**_Golang:_**
-* Download and Install Golang from https://go.dev/dl/ or if you using a mac os then use following command in homebrew environment.
-```sh
-brew install golang
-```
-
-**_Postgresql:_**
-* Download and Install Postgresql from https://www.postgresql.org/download/ or if you using a mac os then use following command in homebrew environment.
-```sh
-brew install postgresql
-```
+**_Docker:_**
+* Download and Install Docker from https://www.docker.com/products/docker-desktop/ 
 
 ### Set up Project
 ---
@@ -37,34 +27,17 @@ brew install postgresql
 ```sh
 git clone https://github.com/mayankr5/Inventory-management-system.git
 ```
-2. Set up the _/config/.env_ file: <br>
-Set **DB_USER** to _user_ , **DB_PASSWORD** to _password_ of postgres user and set **DB_PORT** on which postgres is running (By default postgres runs on PORT 5432. You can set DB_PORT to 5432 also).
-```
-HTTP_PORT=3000
-
-DB_HOST=localhost
-DB_USER={USER_NAME}
-DB_PASSWORD={USER_PASSWORD}
-DB_NAME=inventory_management_system
-DB_PORT={DB_PORT}
-DB_DIALECT=postgres
-```
-3. Now we have to setup Database
-- Run the following command in terminal to create a database. (Make sure you are currently in this directory)
-```sh
-source configs/.env && psql template1 -c "CREATE DATABASE $DB_NAME WITH OWNER $DB_USER;";
-```
-- Now dump schema in that database
-```sh
-source configs/.env && pg_restore -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME db.dump
-```
 
 ### Run Project
 
 ---
-In the project directory run the command:
+If you are running the programming first time then run following command.
 ```sh
-go run main.go
+docker-compose up
+```
+Otherwise run following command.
+```sh
+docker-compose up --build
 ```
 
 Now, Go server is running on **PORT**: 3000 (if you didn't change value of HTTP_PORT in .env file).
