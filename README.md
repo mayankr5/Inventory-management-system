@@ -17,6 +17,7 @@ It is basic inventory management system utilising basic crud operations. It prov
 ## Getting Started
 
 ### Prerequisites
+---
 
 **_Golang:_**
 * Download and Install Golang from https://go.dev/dl/ or if you using a mac os then use following command in homebrew environment.
@@ -31,29 +32,19 @@ brew install postgresql
 ```
 
 ### Set up Database
-1. Open postgresql shell which looks like this
+---
+1. Create database by following command. (_Change user_name in following command with postgres user_name_)
 ```sh
-postgres=#
+psql template1 -c "CREATE DATABASE inventory_management_system WITH OWNER user_name;";
 ```
-2. Now Create Database in postgres by following command
+2. Now restore the dumpfile using following command. (_Make sure you are in current working directory_)
 ```sh
-CREATE DATABSE inventory_management_system;
+psql inventory_management_system < inventory_management_system
 ```
-3. Select and use that database
-```sh
-\c inventory_management_system;
-```
-4. Now Create Product and Categories tables
-```sh
-CREATE TABLE categories (category_id INT GENERATED ALWAYS AS IDENTITY, name VARCHAR(255) NOT NULL, PRIMARY KEY(category_id)); 
-```
-```sh
-CREATE TABLE product (Product_id INT GENERATED ALWAYS AS IDENTITY, name VARCHAR(255) NOT NULL, quantity INT NOT NULL, price INT NOT NULL, category_id INT NOT NULL, PRIMARY KEY(product_id),CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE);
-```
-
-All done. Now close you can close postgres shell.
+Now Database is all setup.
 
 ### Set up Project
+---
 1. Clone the github repository on your local machine directory using command
 ```sh
 git clone https://github.com/mayankr5/Inventory-management-system.git
@@ -79,7 +70,10 @@ DB_DIALECT=postgres
 ```
 Now we are ready to run the project.
 
+
 ### Run Project
+
+---
 In the project directory run the command:
 ```sh
 go run main.go
@@ -89,7 +83,5 @@ Now, Go server is running on **PORT**: 3000 (if you didn't change value of HTTP_
 
 All the API's are in postman collections. Import `Inventory_management_system.postman_collection` file into your postman and run all test.
 
-
-
-
+---
 

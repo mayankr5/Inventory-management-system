@@ -85,7 +85,7 @@ func AddProduct(ctx *gofr.Context) (interface{}, error) {
 		return nil, err
 	}
 
-	return "Successfull added", nil
+	return "Successfully added", nil
 }
 
 func UpdateProduct(ctx *gofr.Context) (interface{}, error) {
