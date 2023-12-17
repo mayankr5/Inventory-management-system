@@ -30,18 +30,6 @@ brew install golang
 ```sh
 brew install postgresql
 ```
-<!-- 
-### Set up Database
----
-1. Create database by following command. (_Change user_name in following command with postgres user_name_)
-```sh
-psql template1 -c "CREATE DATABASE inventory_management_system WITH OWNER user_name;";
-```
-2. Now restore the dumpfile using following command. (_Make sure you are in current working directory_)
-```sh
-psql inventory_management_system < inventory_management_system
-```
-Now Database is all setup. -->
 
 ### Set up Project
 ---
@@ -50,7 +38,7 @@ Now Database is all setup. -->
 git clone https://github.com/mayankr5/Inventory-management-system.git
 ```
 2. Set up the _/config/.env_ file: <br>
-Set **DB_USER** to _user_ and **DB_PASSWORD** to _password_ of that correspond user of postgres
+Set **DB_USER** to _user_ , **DB_PASSWORD** to _password_ of postgres user and set **DB_PORT** on which postgres is running (By default postgres runs on PORT 5432. You can set DB_PORT to 5432 also).
 ```
 HTTP_PORT=3000
 
@@ -58,7 +46,7 @@ DB_HOST=localhost
 DB_USER={USER_NAME}
 DB_PASSWORD={USER_PASSWORD}
 DB_NAME=inventory_management_system
-DB_PORT=5432
+DB_PORT={DB_PORT}
 DB_DIALECT=postgres
 ```
 3. Now we have to setup Database
@@ -68,7 +56,7 @@ source configs/.env && psql template1 -c "CREATE DATABASE $DB_NAME WITH OWNER $D
 ```
 - Now dump schema in that database
 ```sh
-source configs/.env && pg_restore -U $DB_USER -h $DB_HOST -d $DB_NAME db.dump
+source configs/.env && pg_restore -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME db.dump
 ```
 
 ### Run Project
@@ -81,7 +69,7 @@ go run main.go
 
 Now, Go server is running on **PORT**: 3000 (if you didn't change value of HTTP_PORT in .env file).
 
-All the API's are in postman collections. Import `Inventory_management_system.postman_collection` file into your postman and run all test.
+All the API's are in postman collections. Import `Inventory_management_system.postman_collection.json` file into your postman and run all test.
 
 ---
 
